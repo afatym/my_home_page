@@ -1,8 +1,7 @@
 package hamoi.tower.afatym.game;
 
 import java.util.Stack;
-
-public class Tower implements Comparable <Tower> {
+class Tower implements Comparable <Tower> {
     private Stack<Ring> ringList;
 
     protected Tower() {

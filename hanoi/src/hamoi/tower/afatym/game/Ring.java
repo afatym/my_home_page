@@ -1,6 +1,6 @@
 package hamoi.tower.afatym.game;
 
-public class Ring {
+class Ring {
     private final int number;
     private final int size;
 

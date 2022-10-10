@@ -1,6 +1,6 @@
 package hamoi.tower.afatym.game;
 
-public class Game {
+class Game {
     private Tower[] towers = new Tower[3];
     private int numRings;
 
