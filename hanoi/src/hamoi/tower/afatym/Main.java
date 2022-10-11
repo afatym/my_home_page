@@ -1,10 +1,9 @@
 package hamoi.tower.afatym;
 
-import hamoi.tower.afatym.game.GameController;
+import hamoi.tower.afatym.game.GameMenu;
 
 public class Main {
     public static void main(String[] args) {
-        GameController game = new GameController();
-
+        GameMenu gameMenu = new GameMenu();
     }
 }

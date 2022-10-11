@@ -6,7 +6,7 @@ class Ring {
 
     protected Ring(int id) {
         this.number = id;
-        this.size = id;
+        this.size = id*2;
 
     }
     public int getNumber() {

@@ -2,13 +2,10 @@ package hamoi.tower.afatym.game;
 
 class Game {
     private Tower[] towers = new Tower[3];
-    private int numRings;
-
     protected void InitGame(int numRings){
         towers[0] = new Tower();
         towers[1] = new Tower();
         towers[2] = new Tower();
-        this.numRings = numRings;
         for (int i = numRings;i>0;i--){
             towers[0].addRing(new Ring(i));
         }
