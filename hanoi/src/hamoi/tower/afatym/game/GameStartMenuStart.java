@@ -22,6 +22,7 @@ import java.util.Scanner;
                         "Введите количество колец:");
             }else {
                 System.out.println("Start game");
+                GameMenuNewGame game = new GameMenuNewGame(Integer.parseInt(keyWrite));
                 break;
             }
         }

@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public abstract class AbstractGameMenu {
     protected Stack<AbstractGameMenuItem> menuItems = new Stack<>();
-    private Scanner scanner = new Scanner(System.in);
+    protected Scanner scanner = new Scanner(System.in);
 
     protected AbstractGameMenu() {
     }
