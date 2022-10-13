@@ -12,8 +12,9 @@ class GameMenuNewGame extends AbstractGameMenu {
         menuItems.push(new GameNewGameMenuMove("23","Move ring from tower 2 to tower 3", game));
         menuItems.push(new GameNewGameMenuMove("31","Move ring from tower 3 to tower 1", game));
         menuItems.push(new GameNewGameMenuMove("32","Move ring from tower 3 to tower 2", game));
-        //menuItems.push(new GameStartMenuStart("restart","Restart"));
-        menuItems.push(new GameStartMenuQuit("quit","Quit"));
+        menuItems.push(new GameNewGameMenuRestart("1","Restart", game));
+        menuItems.push(new GameNewGameMenuStatus("2","Status",game));
+        menuItems.push(new GameNewGameMenuQuit("3","Quit"));
         chooseOne();
     }
 
@@ -21,8 +22,8 @@ class GameMenuNewGame extends AbstractGameMenu {
         boolean commandIsExist = false;
         boolean returnQuit = true;
         printMenu();
+        game.printGame();
         while (returnQuit) {
-            game.printGame();
             System.out.print("Укажите пункт меню:");
             String itemname = scanner.nextLine();
             for (AbstractGameMenuItem item : menuItems) {
@@ -34,7 +35,7 @@ class GameMenuNewGame extends AbstractGameMenu {
                     }
                     if ( game.getEndGameStatus()){
                         returnQuit = false;
-                        System.out.println("Игра завершена");
+                        endGame();
                     }
                 }
 
@@ -43,6 +44,14 @@ class GameMenuNewGame extends AbstractGameMenu {
                 System.out.println("Данного пункта нет в меню.");
             }
         }
+    }
+
+    private void endGame(){
+        System.out.println("Игра завершена.\nСделано "+ game.getMovesCount() +" ходов.\nМинимальное количество ходов:"+ (int)(Math.pow(2,game.getNumRings())-1));
+        if(game.getMovesCount()==(int)(Math.pow(2,game.getNumRings())-1))
+            System.out.println("Поздравляю.\nТы победил!");
+        else
+            System.out.println("Сожалею.\nТы проиграл!");
     }
 
 }

@@ -1,22 +1,22 @@
 package hamoi.tower.afatym.game;
 
-public abstract class AbstractGameMenuItem {
+ abstract class AbstractGameMenuItem {
     private String id;
 
 
     private String name;
 
 
-    public AbstractGameMenuItem(String id, String name){
+    protected AbstractGameMenuItem(String id, String name){
         this.name = name;
         this.id = id;
     }
 
-    public String getId(){
+    protected String getId(){
         return this.id;
     }
 
-    public String getName() {
+    protected String getName() {
         return name;
     }
 

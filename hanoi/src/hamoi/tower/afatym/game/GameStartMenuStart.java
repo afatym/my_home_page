@@ -12,16 +12,13 @@ import java.util.Scanner;
 
     @Override
     protected void doItem() {
-        System.out.print("New Game\n" +
-                "Введите количество колец:");
+        System.out.print("Введите количество колец:");
         while (true) {
-
             String keyWrite = scanner.nextLine();
             if (!isDigit(keyWrite)) {
                 System.out.print("Введено некорректное значение.\n" +
                         "Введите количество колец:");
             }else {
-                System.out.println("Start game");
                 GameMenuNewGame game = new GameMenuNewGame(Integer.parseInt(keyWrite));
                 break;
             }

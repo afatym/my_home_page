@@ -7,7 +7,6 @@ package hamoi.tower.afatym.game;
 
     @Override
     protected void doItem() {
-        System.out.println("Спасибо за игру");
     }
 
 }

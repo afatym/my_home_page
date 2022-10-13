@@ -3,7 +3,11 @@ package hamoi.tower.afatym.game;
 class Game {
     private Tower[] towers = new Tower[3];
     private int movesCount;
-    protected void InitGame(int numRings){
+
+
+
+    private final int numRings;
+    protected void InitGame(){
         movesCount = 0;
         towers[0] = new Tower();
         towers[1] = new Tower();
@@ -13,18 +17,21 @@ class Game {
         }
     }
 
-    public Game(int numRings) {
-        InitGame(numRings);
+    protected Game(int numRings) {
+        this.numRings = numRings;
+        InitGame();
     }
 
 
     protected void printGame(){
+        System.out.println("-----------------------\nБашни:");
         System.out.print("1||");
         towers[0].printTower();
         System.out.print("2||");
         towers[1].printTower();
         System.out.print("3||");
         towers[2].printTower();
+        System.out.println("-----------------------");
     }
 
     protected boolean getEndGameStatus(){
@@ -34,6 +41,10 @@ class Game {
     protected int getMovesCount(){
         return movesCount;
     }
+    protected int getNumRings() {
+        return numRings;
+    }
+
 
     protected void moveRing(int inTower, int toTower){
         inTower--;

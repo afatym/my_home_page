@@ -3,7 +3,7 @@ package hamoi.tower.afatym.game;
 import java.util.Scanner;
 import java.util.Stack;
 
-public abstract class AbstractGameMenu {
+abstract class AbstractGameMenu {
     protected Stack<AbstractGameMenuItem> menuItems = new Stack<>();
     protected Scanner scanner = new Scanner(System.in);
 
@@ -11,7 +11,7 @@ public abstract class AbstractGameMenu {
     }
 
     protected void printMenu() {
-        System.out.println("-----------------------");
+        System.out.println("-----------------------\nДоступные команды:");
         for (AbstractGameMenuItem item : menuItems)
             item.display();
         System.out.println("-----------------------");
@@ -22,7 +22,7 @@ public abstract class AbstractGameMenu {
         boolean returnQuit = true;
         while (returnQuit) {
             printMenu();
-            System.out.print("Укажите пункт меню:");
+            System.out.print("Ввод команды:");
             String itemname = scanner.nextLine();
             for (AbstractGameMenuItem item : menuItems) {
                 if (itemname.equals(item.getId())) {
@@ -35,7 +35,7 @@ public abstract class AbstractGameMenu {
 
             }
             if(!commandIsExist){
-                System.out.println("Данного пункта нет в меню.");
+                System.out.println("Такой команды нет.");
             }
         }
     }
