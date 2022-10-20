@@ -7,7 +7,7 @@ abstract class AbstractGameMenu {
     protected LinkedList<AbstractGameMenuItem> menuItems = new LinkedList<>();
     protected Scanner scanner = new Scanner(System.in);
 
-    private boolean returnQuit = true;
+    protected boolean returnQuit = true;
 
     protected AbstractGameMenu() {
 
@@ -36,27 +36,20 @@ abstract class AbstractGameMenu {
     }
 
     private boolean checkCommand(String command){
-        try {
-            if (Integer.parseInt(command) > 10 && Integer.parseInt(command) <= 99) ;
-            {
-                for (AbstractGameMenuItem item : menuItems) {
-                    if ("xy".equals(item.getId())) {
-                        returnQuit = item.doItem(command);
-                        return true;
-                    }
+        if(dopSearchCommand(command)){
+            return true;
+        }else {
+            for (AbstractGameMenuItem item : menuItems) {
+                if (command.equals(item.getId())) {
+                    returnQuit = item.doItem(command);
+                    return true;
                 }
-            }
-        }catch (Exception e){
-        }
-        for (AbstractGameMenuItem item : menuItems) {
-            if (command.equals(item.getId())) {
-                returnQuit = item.doItem(command);
-                return true;
-            }
 
+            }
         }
         return false;
     }
+    abstract boolean dopSearchCommand(String command);
 }
 
 public class StartGameMenu extends AbstractGameMenu{
@@ -66,6 +59,11 @@ public class StartGameMenu extends AbstractGameMenu{
         this.menuItems.add(new RuleStartGameMenuItem("2","Print Rule",this));
         this.menuItems.add(new QuitStartGameMenuItem("3", "Quit game",this));
         chooseOne();
+    }
+
+    @Override
+    boolean dopSearchCommand(String command) {
+        return false;
     }
 }
 
@@ -86,5 +84,22 @@ class PlayGameMenu extends AbstractGameMenu{
     protected void printWithStart() {
         game.printGame();
         printMenu();
+    }
+
+    @Override
+    boolean dopSearchCommand(String command) {
+        try {
+            if (Integer.parseInt(command) > 10 && Integer.parseInt(command) <= 99) ;
+            {
+                for (AbstractGameMenuItem item : menuItems) {
+                    if ("xy".equals(item.getId())) {
+                        returnQuit = item.doItem(command);
+                        return true;
+                    }
+                }
+            }
+        }catch (Exception e){
+        }
+        return false;
     }
 }
