@@ -2,7 +2,7 @@ package hamoi.tower.afatym.game;
 
 class Game {
     private Tower[] towers = new Tower[3];
-    private int movesCount;
+    private int movesCount =0;
 
 
 
@@ -40,6 +40,9 @@ class Game {
 
     protected int getMovesCount(){
         return movesCount;
+    }
+    protected int getMovesMaxToWin(){
+        return (int)(Math.pow(2,numRings)-1);
     }
     protected int getNumRings() {
         return numRings;
