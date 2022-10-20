@@ -36,11 +36,24 @@ abstract class AbstractGameMenu {
     }
 
     private boolean checkCommand(String command){
+        try {
+            if (Integer.parseInt(command) > 10 && Integer.parseInt(command) <= 99) ;
+            {
+                for (AbstractGameMenuItem item : menuItems) {
+                    if ("xy".equals(item.getId())) {
+                        returnQuit = item.doItem(command);
+                        return true;
+                    }
+                }
+            }
+        }catch (Exception e){
+        }
         for (AbstractGameMenuItem item : menuItems) {
             if (command.equals(item.getId())) {
-                returnQuit = item.doItem();
+                returnQuit = item.doItem(command);
                 return true;
             }
+
         }
         return false;
     }
@@ -62,7 +75,7 @@ class PlayGameMenu extends AbstractGameMenu{
     PlayGameMenu(int ring){
         game = new Game(ring);
         //todo move
-        this.menuItems.add(new MovePlayGameMenuItem("1", "Move Rings (please",this,game));
+        this.menuItems.add(new MovePlayGameMenuItem("xy", "Move Rings (move x to y tower)",this,game));
         this.menuItems.add(new RestartPlayGameMenuItem("2", "Restart game",this,game));
         this.menuItems.add(new StatusPlayGameMenuItem("3", "Status game moves",this,game));
         this.menuItems.add(new QuitStartGameMenuItem("4", "Return to main menu",this));

@@ -24,19 +24,18 @@ abstract class AbstractGameMenuItem {
         this.game = game;
     }
 
+
     protected String getId(){
         return this.id;
     }
 
-    protected String getName() {
-        return name;
-    }
 
     protected void display(){
         System.out.println(id+") "+name);
     }
 
-    protected abstract boolean doItem();
+    protected abstract boolean doItem(String command);
+
 }
 
 class QuitStartGameMenuItem extends AbstractGameMenuItem{
@@ -45,7 +44,7 @@ class QuitStartGameMenuItem extends AbstractGameMenuItem{
         }
 
         @Override
-        protected boolean doItem() {
+        protected boolean doItem(String command) {
             return false;
         }
 
@@ -57,8 +56,11 @@ class RuleStartGameMenuItem extends AbstractGameMenuItem{
     }
 
     @Override
-    protected boolean doItem() {
-        System.out.println("Тут будут правила");
+    protected boolean doItem(String command) {
+        System.out.println("Ханойская башня является одной из популярных головоломок XIX века. \n" +
+                "Даны три стержня, на один из которых нанизаны восемь колец, причём кольца отличаются размером и лежат меньшее на большем.\n" +
+                "Задача состоит в том, чтобы перенести пирамиду из восьми колец за наименьшее число ходов на другой стержень. \n" +
+                "За один раз разрешается переносить только одно кольцо, причём нельзя класть большее кольцо на меньшее иди снимать и класть обратно.");
         menu.printMenu();
         return true;
     }
@@ -70,7 +72,7 @@ class NewStartGameMenuItem extends AbstractGameMenuItem{
     }
 
     @Override
-    protected boolean doItem() {
+    protected boolean doItem(String command) {
         while(true){
             Scanner scanner = new Scanner(System.in);
             System.out.println("Введите количетсо колец:");
@@ -93,7 +95,7 @@ class StatusPlayGameMenuItem extends AbstractGameMenuItem{
     }
 
     @Override
-    protected boolean doItem() {
+    protected boolean doItem(String command) {
         System.out.println("Сделано "+this.game.getMovesCount()+" ходов из "+ this.game.getMovesMaxToWin());
         game.printGame();
         menu.printMenu();
@@ -108,7 +110,7 @@ class RestartPlayGameMenuItem extends AbstractGameMenuItem{
     }
 
     @Override
-     protected boolean doItem() {
+     protected boolean doItem(String command) {
         game.InitGame();
         game.printGame();
         menu.printMenu();
@@ -122,21 +124,11 @@ class MovePlayGameMenuItem extends AbstractGameMenuItem{
         super(id, name, menu, game);
     }
 
-    @Override
-    protected boolean doItem() {
-        while(true){
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Введите 2 часла (с какойна какую башню переместить кольцо:");
-            try {
-                int mvComand = Integer.parseInt(scanner.nextLine().replaceAll("\\s+",""));
-                game.moveRing(mvComand/10, mvComand%10);
-                break;
-            }catch (Exception e){
-                System.out.println("Введенное значение не является корректным");
-                game.printGame();
-            }
+    protected boolean doItem(String command) {
 
-        }
+        int mvComand = Integer.parseInt(command);
+        game.moveRing(mvComand/10, mvComand%10);
+
         if(game.getEndGameStatus()){
             if(game.getMovesMaxToWin()==game.getMovesCount())
                 System.out.println("Поздравляю ты победил сделав "+game.getMovesCount()+" ходов из "+game.getMovesMaxToWin() +" возможных");

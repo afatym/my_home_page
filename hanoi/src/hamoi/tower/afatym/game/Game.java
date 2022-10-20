@@ -59,7 +59,7 @@ class Game {
                     towers[inTower].remRing();
                     movesCount++;
                 } else {
-                    System.out.println("Нельзя положить большее на меньшее");
+                    System.out.println("Нельзя положить большее на меньшее или снять и положить обратно");
                 }
             }else {
                 towers[toTower].addRing(towers[inTower].getRing());
